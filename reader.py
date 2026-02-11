@@ -13,7 +13,15 @@ def IP_detection_from_an_external_source(list_log):
 
 
 # בדיקת כניסות מפורטים מסוכנים, מחזיר את כל השורה, מקבל את כל המטריצה
-def Identifying_dangerous_port(list_log):
+def identifying_dangerous_port(list_log):
     list_port = [row for row in list_log if row[3] in ["23", "22", "3389"]]
     return list_port
+
+
+def packet_filtering_5000(list_log):
+    list_large = [row for row in list_log if int(row[5]) > 5000]
+    return list_large
+
+
+
 
