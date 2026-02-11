@@ -17,10 +17,16 @@ def identifying_dangerous_port(list_log):
     list_port = [row for row in list_log if row[3] in ["23", "22", "3389"]]
     return list_port
 
-
+# סינון רשימות עם תעבורה גדולה מ 5000
 def packet_filtering_5000(list_log):
     list_large = [row for row in list_log if int(row[5]) > 5000]
     return list_large
+
+# הוספת תגית לכל שורה אם גדול מ 5000 או קטן
+def normal_large_tick(list_log ):
+    list_tick = [row + ["Normal"] if int(row[5]) <= 5000 else row + ["Large"]for row in list_log]
+    return list_tick
+
 
 
 
