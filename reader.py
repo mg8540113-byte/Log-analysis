@@ -14,7 +14,7 @@ def IP_detection_from_an_external_source(list_log):
 
 # בדיקת כניסות מפורטים מסוכנים, מחזיר את כל השורה, מקבל את כל המטריצה
 def identifying_dangerous_port(list_log):
-    list_port = [row for row in list_log if row[3] in ["23", "22", "3389"]]
+    list_port = [row for row in list_log if row[2] in ["23", "22", "3389"]]
     return list_port
 
 # סינון רשימות עם תעבורה גדולה מ 5000
@@ -34,7 +34,13 @@ def number_of_IP_instances(list_log):
     return num_ip
 
 
-a = number_of_IP_instances(log_file_format())
-for ip, count in a.items():
-    print(f"IP: {ip}, Count: {count}")
+# a = number_of_IP_instances(log_file_format())
+# for ip, count in a.items():
+#     print(f"IP: {ip}, Count: {count}")
+
+# יצוא מילון עם מספר פורט והפרוטוקול שלו
+def protocol_check(list_log):
+    port_list = [row[3] for row in list_log]
+    dict_port_protocol = {row[3]: row[4] for row in list_log}
+    return dict_port_protocol
 
