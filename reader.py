@@ -41,9 +41,7 @@ def protocol_check(list_log):
 
 
 
-
-
-
+# סינון כתובות עם סכונים
 def List_risks(list_log):
     dict_risks = {}
     for row in list_log:
@@ -65,6 +63,18 @@ def List_risks(list_log):
         else:
             dict_risks[row[1]] = tast
     return dict_risks
+
+
+
+def addresses_with_two_risks(dict_risks):
+    dict_two_risks = {}
+    for key, value in dict_risks.items():
+        if len(value) == 2:
+            dict_two_risks[key] = value
+    return dict_two_risks
+
+    
+
 
 
 
