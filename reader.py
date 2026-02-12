@@ -69,7 +69,7 @@ def List_risks(list_log):
 def addresses_with_two_risks(dict_risks):
     dict_two_risks = {}
     for key, value in dict_risks.items():
-        if len(value) == 2:
+        if len(value) >= 2:
             dict_two_risks[key] = value
     return dict_two_risks
 
