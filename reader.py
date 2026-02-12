@@ -36,9 +36,39 @@ def number_of_IP_instances(list_log):
 
 # יצוא מילון עם מספר פורט והפרוטוקול שלו
 def protocol_check(list_log):
-    port_list = [row[3] for row in list_log]
     dict_port_protocol = {row[3]: row[4] for row in list_log}
     return dict_port_protocol
 
 
 
+
+
+
+def List_risks(list_log):
+    dict_risks = {}
+    for row in list_log:
+        tast = []
+        if row[0][11:13] in ["00","01","02","03","04","05"]:
+            tast.append("NIGHT_ACTIVITY")
+        if int(row[5]) > 5000:
+            tast.append("LARGE_PACKET")
+        if row[3] in ["23", "22", "3389"]:
+            tast.append("SENSITIVE_PORT")
+        if row[1][0:3] != "10." and row[1][0:7] != "192.168":
+            tast.append("EXTERNAL_IP")
+        if len(tast) == 0:
+            continue
+        if row[1] in dict_risks:
+            dict_risks[row[1]] += (tast)
+            dict_risks[row[1]] = set(dict_risks[row[1]])
+            dict_risks[row[1]] = list(dict_risks[row[1]])
+        else:
+            dict_risks[row[1]] = tast
+    return dict_risks
+
+
+
+
+
+
+        
